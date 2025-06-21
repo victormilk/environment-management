@@ -12,7 +12,7 @@ on:
 jobs:
   fake-deploy:
     runs-on: ubuntu-latest
-    environment: production
+    environment: ${{ inputs.environment }}
     steps:
       - name: Fake Deploy to the environment
         run: echo "Deployment to the environment ${{ vars.DEPLOY_ENV }} is successful!"
