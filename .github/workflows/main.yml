@@ -1,18 +1,26 @@
 name: CD Fake
 on:
   workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Select the environment to deploy to'
-        required: true
-        type: choice
-        options:
-          - production
-          - staging
 jobs:
-  fake-deploy:
+  fake-staging-deploy:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    environment: staging
+    steps:
+      - name: Fake Deploy to the environment
+        run: echo "Deployment to the environment ${{ vars.DEPLOY_ENV }} is successful!"
+
+  fake-test:
+    runs-on: ubuntu-latest
+    environment: staging
+    needs: fake-staging-deploy
+    steps:
+      - name: Fake Test in the environment
+        run: echo "Testing in the environment ${{ vars.DEPLOY_ENV }} is successful!"
+
+  fake-production-deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    needs: fake-test
     steps:
       - name: Fake Deploy to the environment
         run: echo "Deployment to the environment ${{ vars.DEPLOY_ENV }} is successful!"
