@@ -1,6 +1,14 @@
 name: CD Fake
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select the environment to deploy to'
+        required: true
+        type: choice
+        options:
+          - production
+          - staging
 jobs:
   fake-deploy:
     runs-on: ubuntu-latest
