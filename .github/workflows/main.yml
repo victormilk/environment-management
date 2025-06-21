@@ -1,0 +1,9 @@
+name: CD Fake
+on:
+  workflow_dispatch:
+jobs:
+  fake-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fake Deploy to the environment
+        run: echo "Deployment to the environment ${{ vars.DEPLOY_ENV }} is successful!"
