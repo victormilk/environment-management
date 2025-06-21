@@ -4,14 +4,18 @@ on:
 jobs:
   fake-staging-deploy:
     runs-on: ubuntu-latest
-    environment: staging
+    environment:
+      name: staging
+      url: https://staging.example.com
     steps:
       - name: Fake Deploy to the environment
         run: echo "Deployment to the environment ${{ vars.DEPLOY_ENV }} is successful!"
 
   fake-test:
     runs-on: ubuntu-latest
-    environment: staging
+    environment:
+      name: staging
+      url: https://staging.example.com
     needs: fake-staging-deploy
     steps:
       - name: Fake Test in the environment
@@ -19,7 +23,9 @@ jobs:
 
   fake-production-deploy:
     runs-on: ubuntu-latest
-    environment: production
+    environment:
+      name: production
+      url: https://example.com
     needs: fake-test
     steps:
       - name: Fake Deploy to the environment
